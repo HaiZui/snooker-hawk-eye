@@ -57,6 +57,8 @@ if __name__ == "__main__":
     # Font for printed labels        
     font = cv2.FONT_HERSHEY_SIMPLEX
     # Some constants
+    # Resized image size
+    w_scaled = 1366.
     # Cushion width has to be compensated
     cushion = 7
     table_measure_cm = (382.+2*cushion,204.+2*cushion)
@@ -66,6 +68,13 @@ if __name__ == "__main__":
     img_rgb = cv2.imread(path)
 
     h,w,_ = np.shape(img_rgb)
+
+    # Resize image
+    scale = w_scaled / w
+    w_new = int(w*scale)
+    h_new = int(h*scale)
+    img_rgb = cv2.resize(img_rgb, (w_new, h_new))
+
     # Ball radius in pixels
     ball_radius = h*ball_radius_cm/max(table_measure_cm)
 
